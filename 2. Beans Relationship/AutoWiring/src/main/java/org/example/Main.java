@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Sachan.Sachan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +12,7 @@ public class Main {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
         Person person = context.getBean(Person.class);
         System.out.println(person.getParrot());
-        Sachan s = new Sachan();
-        s.printSachan();
+
     }
 }
 
@@ -26,7 +24,7 @@ class ProjectConfig { }
 class Person {
     String name;
 
-    // @Autowired        Not recommended (3.2.1)
+    // @Autowired        Not recommended (3.2.1), unable to make member variable 'final'
     Parrot parrot;
 
     @Autowired          // Recommended  (3.2.2)
@@ -46,7 +44,7 @@ class Person {
         this.parrot = parrot;
     }
 
-//    @Autowired        Strictly not recommended (3.2.3)
+//    @Autowired        Strictly not recommended (3.2.3), it’s more challenging to read, it doesn't allow you to make the field final, and it doesn’t help you in making the testing easier.
 //    public void setParrot(Parrot parrot) {
 //        this.parrot = parrot;
 //    }
